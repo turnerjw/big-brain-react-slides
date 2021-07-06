@@ -1,40 +1,340 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>reveal.js</title>
+    <title>Big Brain React</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/night.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h2>Big Brain React Coding</h2>
+          <p><small>By Justin Turner</small></p>
+        </section>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+        <section>
+          <h2>Intended Audience</h2>
+          <p>- Developers familiar with React</p>
+        </section>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+        <section>
+          <section>
+            <h2>Task</h2>
+            <p>Build a component that:</p>
+            <p>- displays Pokemon in a vertically scrolling list</p>
+            <p>- each list item has a "Catch" button</p>
+          </section>
+          <section>
+            <img src="images/a.png" alt="" />
+          </section>
+        </section>
+
+        <section>
+          <img src="images/programming.gif" alt="" />
+        </section>
+
+        <section>
+          <h2>Your Amazing Code</h2>
+          <pre><code class="hljs" data-trim data-line-numbers><script type="text/template">
+            function PokemonRows() {
+              const [pokemon, setPokemon] = useState(pokemonData);
+
+              const onCatchClick = (pokemonNumber) => {
+                ...
+              }
+
+              return (
+                <div>
+                  {pokemon.map(p => (
+                    <div>
+                      ...
+                    </div>
+                  ))}
+                </div>
+              );
+            }
+					</script></code></pre>
+        </section>
+
+        <section>
+          <section>
+            <p>- Write some tests</p>
+            <p>- Close the ticket</p>
+          </section>
+          <section>
+            <img src="images/bob.gif" alt="" />
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <img src="images/new.gif" alt="" />
+          </section>
+          <section>
+            <h2>New Task</h2>
+            <p>Build a component that:</p>
+            <p>- displays Pokemon in horizontally scrolling cards</p>
+            <p>- each card has a "Catch" button</p>
+          </section>
+          <section>
+            <img src="images/b.png" alt="" />
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Approach?</h2>
+            <p>- functionally this is the same</p>
+          </section>
+          <section>
+            <h2>Reimplement Everything</h2>
+            <p>- duplicate code</p>
+            <p>- higher maintenance cost</p>
+          </section>
+          <section>
+            <h2>Add a prop that determines how it gets rendered</h2>
+            <p>- bloated</p>
+            <p>- harder to test</p>
+          </section>
+        </section>
+
+        <section>
+          <img src="images/scoop.gif" alt="" />
+        </section>
+
+        <section>
+          <h2>Scoop the brains out</h2>
+        </section>
+
+        <section data-auto-animate>
+          <h2 data-id="code-title">Existing Code</h2>
+          <pre
+            data-id="code-animation"
+          ><code class="hljs" data-trim data-line-numbers="|2-6"><script type="text/template">
+            function PokemonRows() {
+              const [pokemon, setPokemon] = useState(pokemonData);
+
+              const onCatchClick = (pokemonNumber) => {
+                ...
+              }
+
+              return (
+                <div>
+                  {pokemon.map(p => (
+                    <div>
+                      ...
+                    </div>
+                  ))}
+                </div>
+              );
+            }
+					</script></code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <h2 data-id="code-title">New Code</h2>
+          <pre
+            data-id="code-animation"
+          ><code class="hljs" data-trim data-line-numbers="|1"><script type="text/template">
+            function PokemonRows({pokemon, onCatchClick}) {
+              return (
+                <div>
+                  {pokemon.map(p => (
+                    <div>
+                      ...
+                    </div>
+                  ))}
+                </div>
+              );
+            }
+					</script></code></pre>
+        </section>
+
+        <section>
+          <h2>The Scoop</h2>
+          <pre><code class="hljs" data-trim data-line-numbers><script type="text/template">
+            function usePokemon() {
+              const [pokemon, setPokemon] = useState(pokemonData);
+            
+              const catchPokemon = (pokemonNumber) => {
+                ...
+              };
+            
+              return {
+                pokemon,
+                catchPokemon,
+              };
+            }
+					</script></code></pre>
+        </section>
+
+        <section>
+          <h2>Putting it together</h2>
+          <pre><code class="hljs" data-trim data-line-numbers><script type="text/template">
+            function SomeContainerComponent() {
+              const { pokemon, catchPokemon } = usePokemon();
+              return <PokemonRows 
+                        pokemon={pokemon}
+                        onCatchClick={catchPokemon} 
+                      />;
+            }
+					</script></code></pre>
+        </section>
+
+        <section>
+          <section>
+            <p>- Build the other view the same way</p>
+            <p>- Feed the hook into the component</p>
+          </section>
+          <section>
+            <p>In the end you have:</p>
+            <p>- 1 hook containing the state and logic</p>
+            <p>- 2 brainless components</p>
+            <p>(or as many components as you want)</p>
+          </section>
+        </section>
+
+        <section>
+          <img src="images/nice.gif" alt="" />
+        </section>
+
+        <section>
+          <h2>
+            <strike>Big</strike>
+            <span style="color: red">Scoop the</span> Brain<span
+              style="color: red"
+              >s</span
+            >
+            Out React Coding
+          </h2>
+          <p><small>By Justin Turner</small></p>
+        </section>
+
+        <section>
+          <section>
+            <h2>Why though?</h2>
+          </section>
+          <section>
+            <h2>
+              React hooks are not just reserved for endlessly reusable utilities
+            </h2>
+          </section>
+        </section>
+
+        <section>
+          <p>- Break things down into smaller pieces</p>
+          <p>- Easy to write, reason with, and maintain</p>
+          <p>- No duplicated code</p>
+        </section>
+
+        <section><h2>TESTING</h2></section>
+
+        <section>
+          <section>
+            <h2>Test the hook on its own</h2>
+            <pre><code>@testing-library/react-hooks</code></pre>
+          </section>
+          <section>
+            <pre><code class="hljs" data-trim data-line-numbers="|5|8-12|15|18-22"><script type="text/template">
+              import { act, renderHook } from "@testing-library/react-hooks";
+              import { usePokemon } from "./index";
+              
+              test("catch pokemon", () => {
+                const { result } = renderHook(() => usePokemon());
+              
+                // Result contains data for Bulbasaur and caught is false
+                expect(result.current.pokemon).toEqual(
+                  expect.arrayContaining([
+                    { name: "Bulbasaur", number: "001", colour: "green", caught: false },
+                  ])
+                );
+              
+                // Catch Bulbasaur (number '001')
+                act(() => result.current.handleCatchClick("001"));
+              
+                // Result contains data for Bulbasaur and caught is true
+                expect(result.current.pokemon).toEqual(
+                  expect.arrayContaining([
+                    { name: "Bulbasaur", number: "001", colour: "green", caught: true },
+                  ])
+                );
+              });
+            </script></code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Test the brainless component on its own</h2>
+            <pre><code>@testing-library/react</code></pre>
+          </section>
+          <section>
+            <p>- The component should now actually be a pure function</p>
+            <p>- The same input will always produce the same output</p>
+            <p>- Super easy to test</p>
+          </section>
+          <section>
+            <pre><code class="hljs" data-trim data-line-numbers="|2-6|8|10-11|13-14"><script type="text/template">
+              test("catch pokemon", () => {
+                // Set up test data
+                const pokemon = ...
+              
+                // Set up mock function
+                const handleCatchClickMock = jest.fn();
+              
+                render(<PokemonRows pokemon={pokemon} onCatchClick={handleCatchClickMock} />);
+              
+                // Click the first catch button
+                userEvent.click(screen.getAllByText("Catch")[0]);
+              
+                // Expect the function to be called with the first pokemon's number
+                expect(handleCatchClickMock).toBeCalledWith("001");
+              });
+            </script></code></pre>
+          </section>
+        </section>
+
+        <section>
+          <h2>In Summary</h2>
+          <p>- Scoop the brains out</p>
+          <p>- Write more maintainable and reusable code</p>
+          <p>- Write easier tests</p>
+          <p>- Get great test coverage</p>
+        </section>
+
+        <section>
+          <p>Demo code: github.com/turnerjw/big-brain-react-demo</p>
+          <p>Slides: github.com/turnerjw/big-brain-react-slides</p>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
 </html>
